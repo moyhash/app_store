@@ -1,0 +1,131 @@
+import 'package:app_store/constants.dart';
+import 'package:flutter/material.dart';
+
+class HomeBody extends StatelessWidget {
+  const HomeBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Column(
+      children: [
+        const SizedBox(height: kDefaultPadding / 2),
+        Expanded(
+            child: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 70.0),
+              decoration: const BoxDecoration(
+                color: kBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+            ),
+            const ProductCard() // classe Container appeler ici
+          ],
+        ))
+      ],
+    ));
+  }
+}
+
+// class ProductCard pour le Contenu et ses child
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: kDefaultPadding,
+        vertical: kDefaultPadding / 2,
+      ),
+      height: 190,
+      //color: Colors.green,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            height: 166,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22.0),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    offset: Offset(0, 15),
+                    blurRadius: 22,
+                    color: Colors.black54,
+                  )
+                ]),
+          ),
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              height: 160.0,
+              width: 200.0,
+              child: Image.asset(
+                "images/Apple_airpod.png",
+                //fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0.0,
+            right: 0.0,
+            child: SizedBox(
+              height: 136.0,
+              width: size.width - 200, // notre image width = 200 donc
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Spacer(), // Une Espace
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    child: Text(
+                      'Ecouteur Bluetooth',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                  const Spacer(), // Une Espace
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    child: Text(
+                      'Ecouteur haut Game',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding * 1.5,
+                        vertical: kDefaultPadding / 5,
+                      ),
+                      decoration: BoxDecoration(
+                          color: kSecondaryColor,
+                          borderRadius: BorderRadius.circular(22.0)),
+                      child: Text(
+                        'Prix: 1426£',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
